@@ -1,0 +1,45 @@
+﻿@model IEnumerable<WatchShop.Models.Entities.Category>
+
+@{
+    ViewData["Title"] = "Quản lý danh mục";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Quản lý danh mục</h2>
+<div class="text-warning">
+    @ViewBag.TypeError
+</div>
+<hr />
+<div class="col-lg-6">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <a class="btn btn-primary btn-default" href="@Url.Action("Create", "Category")" role="button"><i class="fa fa-plus-circle"></i> Tạo mới</a>
+        </div>
+        <div class="table-responsive table-bordered">
+            <table class="table">
+                <thead>
+                    <tr style="background-color:#eeeeee">
+                        <th>Mã danh mục</th>
+                        <th>Tên danh mục </th>
+                        <th>Trạng thái</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.CategoryID)</td>
+                            <td>@Html.DisplayFor(modelItem => item.CategoryName)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                            <td>
+                                <a href="@Url.Action("Details", "Category", new { id = item.CategoryID })"><i class="fas fa-eye"></i></a> |
+                                <a href="@Url.Action("Edit", "Category", new { id = item.CategoryID })"><i class="fas fa-edit"></i></a> |
+                                <a onclick="return confirm('Bạn có chắc chắn muốn xoá danh mục này?')" href="@Url.Action("Delete", "Category", new { id = item.CategoryID })"><i class="fas fa-trash-alt"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

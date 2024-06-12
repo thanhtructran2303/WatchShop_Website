@@ -1,0 +1,60 @@
+﻿@model IEnumerable<WatchShop.Models.Entities.Product>
+@{
+    ViewBag.Title = "Sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+
+}
+<h2>Quản lý sản phẩm</h2>
+<div class="text-warning">
+    @ViewBag.ProError
+</div>
+<hr />
+<div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <a class="btn btn-primary btn-default" href="@Url.Action("Create", "Product")" role="button"><i class="fa fa-plus-circle"></i> Tạo mới</a>
+        </div>
+        <div class="table-responsive table-bordered">
+            <table class="table">
+                <thead>
+                    <tr style="background-color:#eeeeee">
+                        <th scope="col">Mã sản phẩm</th>
+                        <th scope="col">Tên sản phẩm</th>
+                        <th scope="col">Danh mục</th>
+                        <th scope="col">Thương hiệu</th>
+                        <th scope="col">Ngày tạo</th>
+                        <th scope="col">Ngày cập nhật</th>
+                        <th scope="col">Đơn giá</th>
+                        <th scope="col">Tồn kho</th>
+                        <th scope="col">Hình ảnh</th>
+                        <th scope="col">Trạng thái</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.ProductID)</td>
+                            <td>@Html.DisplayFor(modelItem => item.ProductName)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Category.CategoryName)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Brand.BrandName)</td>
+                            <td>@Html.DisplayFor(modelItem => item.CreateDate)</td>
+                            <td>@Html.DisplayFor(modelItem => item.LastUpdate)</td>
+                            <td>@Html.DisplayFor(modelItem => item.UnitPrice)</td>
+                            <td>@Html.DisplayFor(modelItem => item.InStock)</td>
+                            <td><img src="~/img/@item.Image" width="50" height="50" /></td>
+                            <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                            <td>
+                                <a href="@Url.Action("Details", "Product", new { id = item.ProductID })"><i class="fas fa-eye"></i></a>
+                                <a href="@Url.Action("Edit", "Product", new { id = item.ProductID })"><i class="fas fa-edit"></i></a>
+                                <a onclick="return confirm('Bạn có chắc chắn muốn xoá sản phẩm này?')" href="@Url.Action("Delete", "Product", new { id = item.ProductID })"><i class="fas fa-trash-alt"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.panel-body -->
+    </div>
+    <!-- /.panel -->
+</div>

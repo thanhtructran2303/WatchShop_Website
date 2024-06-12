@@ -1,0 +1,28 @@
+﻿@model WatchShop.Models.Entities.Category
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h4>Chi tiết danh mục</h4>
+<hr />
+<div>
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CategoryName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CategoryName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a href="@Url.Action("Edit", "Category", new { id = Model?.CategoryID })">Chỉnh sửa</a> |
+    <a href="@Url.Action("Index","Category")">Trở lại</a>
+</div>
